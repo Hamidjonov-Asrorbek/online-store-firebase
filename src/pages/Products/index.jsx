@@ -4,7 +4,7 @@ import ProductModal from "../../components/ProductModal";
 
 function Products() {
   const { data, isPending, error } = useGetData("products");
-  console.log(data);
+
   return (
     <section>
       <div className="container">
@@ -26,7 +26,12 @@ function Products() {
               ></span>
             </div>
           )}
-          {!!data && (
+          {error.status && (
+            <div className="mt-10 mb-10 flex items-center justify-center">
+              <span className="text-error">{error.message}</span>
+            </div>
+          )}
+          {!isPending && !error.status && data.length > 0 && (
             <div>
               {data.map(
                 ({ id, name, price, description, image, stock, rating }) => (
@@ -51,7 +56,6 @@ function Products() {
           )}
         </div>
       </div>
-      {/* You can open the modal using document.getElementById('ID').showModal() method */}
       <ProductModal />
     </section>
   );

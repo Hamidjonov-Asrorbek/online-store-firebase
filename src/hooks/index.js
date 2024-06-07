@@ -2,10 +2,11 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase/config";
 
-async function useGetData(collectionName) {
+function useGetData(collectionName) {
   const [data, setData] = useState([]);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState({ status: false, message: "" });
+
   useEffect(() => {
     const getData = async () => {
       const documents = [];
@@ -13,7 +14,6 @@ async function useGetData(collectionName) {
         const querySnapshot = await getDocs(collection(db, collectionName));
         querySnapshot.forEach((doc) => {
           console.log(doc.id, " => ", doc.data());
-          console.log({ ...doc.data(), id: doc.id });
           documents.push({ ...doc.data(), id: doc.id });
         });
         setData(documents);
@@ -24,7 +24,8 @@ async function useGetData(collectionName) {
       }
     };
     getData();
-  }, []);
+  }, [collectionName]);
+
   return { data, isPending, error };
 }
 
