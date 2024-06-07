@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { db } from "../../firebase/config";
+import { addDoc, collection } from "firebase/firestore";
 
 function ProductModal() {
   const [productData, setProductData] = useState({
@@ -9,9 +11,18 @@ function ProductModal() {
     rating: "0",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Aaaaaaaaa");
+    const docRef = await addDoc(collection(db, "products"), {
+      ...productData,
+    });
+    setProductData({
+      name: "",
+      price: "",
+      description: "",
+      image: "",
+      rating: "0",
+    });
     console.log(productData);
   };
   return (
