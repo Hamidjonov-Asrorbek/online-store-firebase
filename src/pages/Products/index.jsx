@@ -59,7 +59,7 @@ function Products() {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Hello!</h3>
+          <h3 className="font-bold text-lg">Product!</h3>
           <form className="flex flex-col items-center">
             {/* product name */}
             <label class="form-control w-full max-w-xs">
@@ -110,6 +110,68 @@ function Products() {
             </label>
 
             {/* product rating */}
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Product Rating</span>
+              </div>
+              <div className="rating rating-lg rating-half">
+                <input
+                  type="radio"
+                  name="rating-10"
+                  className="rating-hidden"
+                />
+                <input
+                  type="radio"
+                  name="rating-10"
+                  className="bg-green-500 mask mask-star-2 mask-half-1"
+                />
+                <input
+                  type="radio"
+                  name="rating-10"
+                  className="bg-green-500 mask mask-star-2 mask-half-2"
+                />
+                <input
+                  type="radio"
+                  name="rating-10"
+                  className="bg-green-500 mask mask-star-2 mask-half-1"
+                />
+                <input
+                  type="radio"
+                  name="rating-10"
+                  className="bg-green-500 mask mask-star-2 mask-half-2"
+                />
+                <input
+                  type="radio"
+                  name="rating-10"
+                  className="bg-green-500 mask mask-star-2 mask-half-1"
+                />
+                <input
+                  type="radio"
+                  name="rating-10"
+                  className="bg-green-500 mask mask-star-2 mask-half-2"
+                />
+                <input
+                  type="radio"
+                  name="rating-10"
+                  className="bg-green-500 mask mask-star-2 mask-half-1"
+                />
+                <input
+                  type="radio"
+                  name="rating-10"
+                  className="bg-green-500 mask mask-star-2 mask-half-2"
+                />
+                <input
+                  type="radio"
+                  name="rating-10"
+                  className="bg-green-500 mask mask-star-2 mask-half-1"
+                />
+                <input
+                  type="radio"
+                  name="rating-10"
+                  className="bg-green-500 mask mask-star-2 mask-half-2"
+                />
+              </div>
+            </label>
           </form>
         </div>
       </dialog>
