@@ -32,7 +32,7 @@ function Products() {
             </div>
           )}
           {!isPending && !error.status && data.length > 0 && (
-            <div>
+            <div className="flex flex-wrap gap-5 mt-5">
               {data.map(
                 ({ id, name, price, description, image, stock, rating }) => (
                   <div
