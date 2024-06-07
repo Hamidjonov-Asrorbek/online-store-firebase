@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase/config";
 
@@ -26,7 +26,16 @@ function useGetData(collectionName) {
     getData();
   }, [collectionName]);
 
-  return { data, isPending, error };
+  const deleteProduct = async (id) => {
+    try {
+      await deleteDoc(doc(db, collectionName, id));
+      setData(data.filter((product) => product.id !== id));
+    } catch (error) {
+      setError({ status: true, message: error.message });
+    }
+  };
+
+  return { data, isPending, error, deleteProduct };
 }
 
 export default useGetData;

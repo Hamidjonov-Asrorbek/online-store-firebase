@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import useGetData from "../../hooks";
 import ProductModal from "../../components/ProductModal";
 
 function Products() {
-  const { data, isPending, error } = useGetData("products");
+  const { data, isPending, error, deleteProduct } = useGetData("products");
 
   return (
     <section>
@@ -46,7 +46,12 @@ function Products() {
                       <h2 className="card-title">{name}</h2>
                       <p>{description}</p>
                       <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
+                        <button
+                          onClick={() => deleteProduct(id)}
+                          className="btn btn-error"
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
                   </div>
