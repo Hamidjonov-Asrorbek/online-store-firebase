@@ -4,6 +4,7 @@ import ProductModal from "../../components/ProductModal";
 
 function Products() {
   const { data, isPending, error, deleteProduct } = useGetData("products");
+  console.log(data);
 
   return (
     <section>
@@ -45,7 +46,9 @@ function Products() {
                     <div className="card-body">
                       <h2 className="card-title">{name}</h2>
                       <p>{description}</p>
-                      <div className="card-actions justify-end">
+
+                      <div className="card-actions flex items-center justify-between">
+                        <p>{price} $</p>
                         <button
                           onClick={() => deleteProduct(id)}
                           className="btn btn-error"
