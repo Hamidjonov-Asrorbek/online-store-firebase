@@ -6,11 +6,13 @@ function ProductModal() {
     price: "",
     description: "",
     image: "",
-    rating: "",
+    rating: "0",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Aaaaaaaaa");
+    console.log(productData);
   };
   return (
     <dialog id="my_modal_3" className="modal">
@@ -24,9 +26,9 @@ function ProductModal() {
         <h3 className="font-bold text-2xl text-center">Create Product!</h3>
         <form className="flex flex-col items-center" onSubmit={handleSubmit}>
           {/* product name */}
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Product Name</span>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Product Name</span>
             </div>
             <input
               value={productData.name}
@@ -40,9 +42,9 @@ function ProductModal() {
           </label>
 
           {/* product description */}
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Product Description</span>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Product Description</span>
             </div>
             <textarea
               value={productData.description}
@@ -56,9 +58,9 @@ function ProductModal() {
           </label>
 
           {/* product image */}
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Product Image</span>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Product Image</span>
             </div>
             <input
               value={productData.image}
@@ -72,14 +74,14 @@ function ProductModal() {
           </label>
 
           {/* product price */}
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Product Price</span>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Product Price</span>
             </div>
             <input
               value={productData.price}
               onChange={(e) =>
-                setProductData({ ...productData, price: e.target.value })
+                setProductData({ ...productData, price: +e.target.value })
               }
               type="number"
               placeholder="Enter product price"
@@ -88,9 +90,9 @@ function ProductModal() {
           </label>
 
           {/* product rating */}
-          <label class="form-control w-full max-w-xs">
-            <div class="label">
-              <span class="label-text">Product Rating</span>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Product Rating</span>
             </div>
             <div className="rating rating-lg rating-half">
               <input type="radio" name="rating-10" className="rating-hidden" />
@@ -106,51 +108,81 @@ function ProductModal() {
                 type="radio"
                 name="rating-10"
                 className="bg-green-500 mask mask-star-2 mask-half-2"
+                onChange={() => {
+                  setProductData({ ...productData, rating: 1 });
+                }}
               />
               <input
                 type="radio"
                 name="rating-10"
                 className="bg-green-500 mask mask-star-2 mask-half-1"
+                onChange={() => {
+                  setProductData({ ...productData, rating: 1.5 });
+                }}
               />
               <input
                 type="radio"
                 name="rating-10"
                 className="bg-green-500 mask mask-star-2 mask-half-2"
+                onChange={() => {
+                  setProductData({ ...productData, rating: 2 });
+                }}
               />
               <input
                 type="radio"
                 name="rating-10"
                 className="bg-green-500 mask mask-star-2 mask-half-1"
+                onChange={() => {
+                  setProductData({ ...productData, rating: 2.5 });
+                }}
               />
               <input
                 type="radio"
                 name="rating-10"
                 className="bg-green-500 mask mask-star-2 mask-half-2"
+                onChange={() => {
+                  setProductData({ ...productData, rating: 3 });
+                }}
               />
               <input
                 type="radio"
                 name="rating-10"
                 className="bg-green-500 mask mask-star-2 mask-half-1"
+                onChange={() => {
+                  setProductData({ ...productData, rating: 3.5 });
+                }}
               />
               <input
                 type="radio"
                 name="rating-10"
                 className="bg-green-500 mask mask-star-2 mask-half-2"
+                onChange={() => {
+                  setProductData({ ...productData, rating: 4 });
+                }}
               />
               <input
                 type="radio"
                 name="rating-10"
                 className="bg-green-500 mask mask-star-2 mask-half-1"
+                onChange={() => {
+                  setProductData({ ...productData, rating: 4.5 });
+                }}
               />
               <input
                 type="radio"
                 name="rating-10"
                 className="bg-green-500 mask mask-star-2 mask-half-2"
+                onChange={() => {
+                  setProductData({ ...productData, rating: 5 });
+                }}
               />
             </div>
           </label>
           {/* BUTTON */}
-          <button className="btn mt-5 w-full max-w-xs btn-primary">
+          <button
+            type="submit"
+            className="btn mt-5 w-full max-w-xs btn-primary"
+          >
             Add Product
           </button>
         </form>
