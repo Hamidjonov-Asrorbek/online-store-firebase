@@ -59,7 +59,7 @@ function Products() {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Product!</h3>
+          <h3 className="font-bold text-2xl text-center">Create Product!</h3>
           <form className="flex flex-col items-center">
             {/* product name */}
             <label class="form-control w-full max-w-xs">
@@ -172,6 +172,10 @@ function Products() {
                 />
               </div>
             </label>
+            {/* BUTTON */}
+            <button className="btn mt-5 w-full max-w-xs btn-primary">
+              Add Product
+            </button>
           </form>
         </div>
       </dialog>
