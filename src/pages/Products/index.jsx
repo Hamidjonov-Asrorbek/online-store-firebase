@@ -3,14 +3,20 @@ import useGetData from "../../hooks";
 
 function Products() {
   const { data, isPending, error } = useGetData("products");
+  console.log(data);
   return (
     <section>
       <div className="container">
         <div className="title flex justify-between items-center pb-4 border-b-2">
           <h2 className="text-2xl">Products</h2>
-          <button className="btn btn-outline btn-sm">Add</button>
+          <button
+            onClick={() => document.getElementById("my_modal_3").showModal()}
+            className="btn btn-outline btn-sm"
+          >
+            Add
+          </button>
         </div>
-        <div className="">
+        <div>
           {isPending && (
             <div className="mt-10 mb-10 flex items-center justify-center">
               <span
@@ -44,6 +50,69 @@ function Products() {
           )}
         </div>
       </div>
+      {/* You can open the modal using document.getElementById('ID').showModal() method */}
+      <dialog id="my_modal_3" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <form className="flex flex-col items-center">
+            {/* product name */}
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Product Name</span>
+              </div>
+              <input
+                type="text"
+                placeholder="Enter product name"
+                className="input input-bordered input-success w-full max-w-xs"
+              />
+            </label>
+
+            {/* product description */}
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Product Description</span>
+              </div>
+              <textarea
+                type="text"
+                placeholder="Enter product description"
+                className="input input-bordered input-success w-full max-w-xs"
+              />
+            </label>
+
+            {/* product image */}
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Product Image</span>
+              </div>
+              <input
+                type="link"
+                placeholder="Enter product image link"
+                className="input input-bordered input-success w-full max-w-xs"
+              />
+            </label>
+
+            {/* product price */}
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Product Price</span>
+              </div>
+              <input
+                type="number"
+                placeholder="Enter product price"
+                className="input input-bordered input-success w-full max-w-xs"
+              />
+            </label>
+
+            {/* product rating */}
+          </form>
+        </div>
+      </dialog>
     </section>
   );
 }
