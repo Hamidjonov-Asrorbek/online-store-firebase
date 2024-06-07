@@ -11,8 +11,26 @@ function ProductModal() {
     rating: "0",
   });
 
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const errors = {};
+    if (!productData.name) errors.name = "Product name is required";
+    if (!productData.price || productData.price <= 0)
+      errors.price = "Product price must be a positive number";
+    if (!productData.description)
+      errors.description = "Product description is required";
+    if (!productData.image) errors.image = "Product image link is required";
+    return errors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
     const docRef = await addDoc(collection(db, "products"), {
       ...productData,
     });
@@ -23,21 +41,22 @@ function ProductModal() {
       image: "",
       rating: "0",
     });
+    setErrors({});
     document.getElementById("my_modal_3").closest("dialog").close();
     console.log(productData);
   };
+
   return (
     <dialog id="my_modal_3" className="modal">
       <div className="modal-box">
         <form method="dialog">
-          {/* if there is a button in form, it will close the modal */}
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
             ✕
           </button>
         </form>
         <h3 className="font-bold text-2xl text-center">Create Product!</h3>
         <form className="flex flex-col items-center" onSubmit={handleSubmit}>
-          {/* product name */}
+          {/* Product name */}
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Product Name</span>
@@ -51,9 +70,10 @@ function ProductModal() {
               placeholder="Enter product name"
               className="input input-bordered input-success w-full max-w-xs"
             />
+            {errors.name && <span className="text-red-500">{errors.name}</span>}
           </label>
 
-          {/* product description */}
+          {/* Product description */}
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Product Description</span>
@@ -67,9 +87,12 @@ function ProductModal() {
               placeholder="Enter product description"
               className="input input-bordered input-success w-full max-w-xs"
             />
+            {errors.description && (
+              <span className="text-red-500">{errors.description}</span>
+            )}
           </label>
 
-          {/* product image */}
+          {/* Product image */}
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Product Image</span>
@@ -83,9 +106,12 @@ function ProductModal() {
               placeholder="Enter product image link"
               className="input input-bordered input-success w-full max-w-xs"
             />
+            {errors.image && (
+              <span className="text-red-500">{errors.image}</span>
+            )}
           </label>
 
-          {/* product price */}
+          {/* Product price */}
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Product Price</span>
@@ -99,9 +125,12 @@ function ProductModal() {
               placeholder="Enter product price"
               className="input input-bordered input-success w-full max-w-xs"
             />
+            {errors.price && (
+              <span className="text-red-500">{errors.price}</span>
+            )}
           </label>
 
-          {/* product rating */}
+          {/* Product rating */}
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Product Rating</span>
@@ -190,6 +219,7 @@ function ProductModal() {
               />
             </div>
           </label>
+
           {/* BUTTON */}
           <button
             type="submit"
