@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import useGetData from "../../hooks";
 import ProductModal from "../../components/ProductModal";
+import { db } from "../../firebase/config";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 
 function Products() {
   const [filter, setFilter] = useState("rating");
@@ -17,9 +19,16 @@ function Products() {
     setRefresh((prev) => !prev);
     document.getElementById("my_modal_2").closest("dialog").close();
   };
-  const handleAddToCart = () => {
-    // document.getElementById("my_modal_1").showModal();
-    // document.getElementById("my_modal_1").closest("dialog").close();
+  const handleAddToCart = async (id) => {
+    document.getElementById("my_modal_2").showModal();
+    const ref = doc(db, "cart", "pQ5LQPnWXS5aduYYNPyh");
+    await updateDoc(ref, {
+      products: arrayUnion({
+        productID: id,
+        count: 1,
+      }),
+    });
+    document.getElementById("my_modal_2").closest("dialog").close();
   };
 
   return (

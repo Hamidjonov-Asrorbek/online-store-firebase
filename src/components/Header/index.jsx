@@ -3,16 +3,20 @@ import useGetData from "../../hooks";
 
 function Header() {
   const [refresh, setRefresh] = useState(false);
-  const { data, isPending, error } = useGetData("cart", refresh, null);
+  const {
+    data: [data],
+    isPending,
+    error,
+  } = useGetData("cart", refresh, null);
   const [total, setTotal] = useState(0);
   console.log(data);
 
-  useEffect(() => {
-    if (data) {
-      const newTotal = data.reduce((acc, { price }) => acc + price, 0);
-      setTotal(newTotal);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     const newTotal = data.reduce((acc, { price }) => acc + price, 0);
+  //     setTotal(newTotal);
+  //   }
+  // }, [data]);
 
   return (
     <header className="navbar bg-base-300">
@@ -99,7 +103,7 @@ function Header() {
                     />
                   </svg>
                   <span className="badge badge-sm badge-primary indicator-item">
-                    {data?.length ?? 0}
+                    {data?.products.length ?? 0}
                   </span>
                 </div>
               </div>
@@ -109,7 +113,7 @@ function Header() {
               >
                 <div className="card-body">
                   <span className="font-bold text-lg">
-                    {data?.length ?? 0} Items
+                    {data?.products.length ?? 0} Items
                   </span>
                   <span className="text-info">Subtotal: ${total}</span>
                   <div className="card-actions">
