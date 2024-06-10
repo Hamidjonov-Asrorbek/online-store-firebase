@@ -1,8 +1,8 @@
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { db } from "../firebase/config";
 
-function useGetData(collectionName) {
+function useGetData(collectionName, refresh, filter = null) {
   const [data, setData] = useState([]);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState({ status: false, message: "" });
@@ -13,7 +13,7 @@ function useGetData(collectionName) {
       try {
         const querySnapshot = await getDocs(collection(db, collectionName));
         querySnapshot.forEach((doc) => {
-          console.log(doc.id, " => ", doc.data());
+          // console.log(doc.id, " => ", doc.data());
           documents.push({ ...doc.data(), id: doc.id });
         });
         setData(documents);
@@ -24,7 +24,37 @@ function useGetData(collectionName) {
       }
     };
     getData();
-  }, [collectionName]);
+  }, [refresh]);
+
+  const filterData = useMemo(() => {
+    if (filter === null) {
+      return data;
+    }
+    if (filter === "name") {
+      return data.sort(function (a, b) {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+
+    if (filter === "!name") {
+      return data.sort(function (a, b) {
+        if (a.name < b.name) {
+          return 1;
+        }
+        if (a.name > b.name) {
+          return -1;
+        }
+        return 0;
+      });
+    }
+    return data.sort((a, b) => b[`${filter}`] - a[`${filter}`]);
+  }, [filter, data]);
 
   const deleteProduct = async (id) => {
     try {
@@ -35,7 +65,7 @@ function useGetData(collectionName) {
     }
   };
 
-  return { data, isPending, error, deleteProduct };
+  return { data: filterData, isPending, error, deleteProduct };
 }
 
 export default useGetData;

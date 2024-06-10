@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { db } from "../../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
 
-function ProductModal() {
+function ProductModal({ setRefresh }) {
   const [productData, setProductData] = useState({
     name: "",
     price: "",
@@ -43,7 +43,7 @@ function ProductModal() {
     });
     setErrors({});
     document.getElementById("my_modal_3").closest("dialog").close();
-    console.log(productData);
+    setRefresh((prev) => !prev);
   };
 
   return (
@@ -140,7 +140,7 @@ function ProductModal() {
               <input
                 type="radio"
                 name="rating-10"
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
                 onChange={() => {
                   setProductData({ ...productData, rating: 0.5 });
                 }}
@@ -148,7 +148,7 @@ function ProductModal() {
               <input
                 type="radio"
                 name="rating-10"
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
                 onChange={() => {
                   setProductData({ ...productData, rating: 1 });
                 }}
@@ -156,7 +156,7 @@ function ProductModal() {
               <input
                 type="radio"
                 name="rating-10"
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
                 onChange={() => {
                   setProductData({ ...productData, rating: 1.5 });
                 }}
@@ -164,7 +164,7 @@ function ProductModal() {
               <input
                 type="radio"
                 name="rating-10"
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
                 onChange={() => {
                   setProductData({ ...productData, rating: 2 });
                 }}
@@ -172,7 +172,7 @@ function ProductModal() {
               <input
                 type="radio"
                 name="rating-10"
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
                 onChange={() => {
                   setProductData({ ...productData, rating: 2.5 });
                 }}
@@ -180,7 +180,7 @@ function ProductModal() {
               <input
                 type="radio"
                 name="rating-10"
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
                 onChange={() => {
                   setProductData({ ...productData, rating: 3 });
                 }}
@@ -188,7 +188,7 @@ function ProductModal() {
               <input
                 type="radio"
                 name="rating-10"
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
                 onChange={() => {
                   setProductData({ ...productData, rating: 3.5 });
                 }}
@@ -196,7 +196,7 @@ function ProductModal() {
               <input
                 type="radio"
                 name="rating-10"
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
                 onChange={() => {
                   setProductData({ ...productData, rating: 4 });
                 }}
@@ -204,7 +204,7 @@ function ProductModal() {
               <input
                 type="radio"
                 name="rating-10"
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
                 onChange={() => {
                   setProductData({ ...productData, rating: 4.5 });
                 }}
@@ -212,7 +212,7 @@ function ProductModal() {
               <input
                 type="radio"
                 name="rating-10"
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
                 onChange={() => {
                   setProductData({ ...productData, rating: 5 });
                 }}
