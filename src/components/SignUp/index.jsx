@@ -65,6 +65,10 @@ function SignUp() {
           firebase: "Failed to sign up. Please check your credentials.",
         }));
       });
+    localStorage.setItem(
+      "user",
+      JSON.stringify(auth.currentUser.providerData[0])
+    );
   };
   const handleUpdateProfile = (e) => {
     e.preventDefault();
