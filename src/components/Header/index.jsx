@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import useGetData from "../../hooks";
+import { auth } from "../../firebase/config";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
   const [refresh, setRefresh] = useState(false);
   const {
     data: [data],
@@ -10,7 +14,20 @@ function Header() {
   } = useGetData("cart", refresh, null);
   const [total, setTotal] = useState(0);
   console.log(data);
+  const user = auth?.currentUser?.providerData[0];
+  console.log(user);
 
+  const handleLogOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        navigate("/login");
+        localStorage.setItem("user", null);
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
   // useEffect(() => {
   //   if (data) {
   //     const newTotal = data.reduce((acc, { price }) => acc + price, 0);
@@ -63,22 +80,34 @@ function Header() {
           <a className="btn btn-ghost text-xl">MarKet</a>
         </div>
         <div className="navbar-end">
-          <button className="btn btn-ghost btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </button>
+              {<img src={user?.photoURL} alt="avatar" width={30} height={30} />}
+            </div>
+            <div
+              tabIndex={0}
+              className="mt-3 z-[100] card card-compact dropdown-content w-52 bg-base-100 shadow"
+            >
+              <div className="card-body">
+                <span className="font-bold text-lg">
+                  <p>{user?.displayName}</p>
+                  <p>{user?.email}</p>
+                </span>
+                <div className="card-actions">
+                  <button
+                    className="btn btn-primary btn-block"
+                    onClick={handleLogOut}
+                  >
+                    Log Out
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div className="indicator">
             <div className="dropdown dropdown-end">

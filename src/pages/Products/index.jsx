@@ -76,7 +76,7 @@ function Products() {
                     key={id}
                     className="card card-compact w-72 bg-base-100 shadow-sm shadow-white"
                   >
-                    <figure className="bg-white">
+                    <figure className="bg-slate-100">
                       <img src={image} alt={name} />
                     </figure>
                     <div className="card-body box-border">

@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../../firebase/config";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -73,8 +73,8 @@ function SignUp() {
   const handleUpdateProfile = (e) => {
     e.preventDefault();
     updateProfile(auth.currentUser, {
-      displayName: signData.email.split("@")[0],
-      photoURL: signData.email,
+      displayName: signData.displayName,
+      photoURL: signData.photoURL,
     })
       .then(() => {
         console.log("Profile updated");
@@ -142,6 +142,12 @@ function SignUp() {
           <button type="submit" className="btn btn-primary">
             Sign Up
           </button>
+          <p className="text-center">
+            Already have an account?
+            <Link className="link text-primary ml-2" to="/login">
+              Sign In
+            </Link>
+          </p>
         </form>
       ) : (
         <form
