@@ -3,7 +3,10 @@ import useGetData from "../../hooks";
 import { auth } from "../../firebase/config";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import darkModeSlice, { selectDarkMode } from "../darkModeSlice";
+import darkModeSlice, {
+  selectDarkMode,
+  toggleDarkMode,
+} from "../darkModeSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function Header() {
