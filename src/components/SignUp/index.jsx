@@ -48,12 +48,10 @@ function SignUp() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(signData);
     createUserWithEmailAndPassword(auth, signData.email, signData.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
         setRegister(true);
       })
       .catch((error) => {
@@ -77,7 +75,6 @@ function SignUp() {
       photoURL: signData.photoURL,
     })
       .then(() => {
-        console.log("Profile updated");
         navigate("/");
       })
       .catch((error) => {

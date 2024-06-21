@@ -47,18 +47,15 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(auth);
 
     // Validate inputs
     if (!validateInputs()) {
       return;
     }
-    console.log(loginData);
     signInWithEmailAndPassword(auth, loginData.email, loginData.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user.providerData);
         localStorage.setItem("user", JSON.stringify(user.providerData));
         navigate("/");
       })
